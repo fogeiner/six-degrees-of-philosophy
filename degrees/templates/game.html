@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+
+{% block body %}
+<span>Article: {{ article }} ({{ hops }} hop(s) made)</span>
+<form method="POST" action="move">
+    <fieldset>
+        <legend>Links</legend>
+        <input type="hidden" name="currentArticle" value="{{article}}">
+        {% for href in hrefs %}
+        <input type="radio" id="v{{loop.index}}" name="article" value="{{href}}" {% if loop.index == 1%}checked{%endif%}>
+        <label for="v{{loop.index}}">{{href}}</label><br/>
+        {% endfor %}
+        <input type="radio" id="philosophy" name="article" value="Philosophy"><label style="color: red" for="philosophy"> Cheating: Philosophy</label><br/>
+        <input type="submit" value="Submit">
+    </fieldset>
+</form>
+{% endblock%}

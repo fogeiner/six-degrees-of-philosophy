@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="/static/style.css">
+        <title>Six degrees to philosophy</title>
+    </head>
+    <body>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class=flashes>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block body %}
+
+        {# This is the block named "body" whose contents you should modify #}
+
+        <form action="new-game" method="POST">
+            <label for="">Page title: </label> <input type="text" name="article">
+            <input type="submit" value="Start game">
+        </form>
+
+        {# This is the end of the "body" block #}
+        {% endblock %}
+    </body>
+</html>
