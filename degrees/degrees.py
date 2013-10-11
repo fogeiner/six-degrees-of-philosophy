@@ -9,6 +9,10 @@ app = Flask(__name__)
 
 app.secret_key = "Any secret value"
 
+MESSAGE_ERROR='error'
+MESSAGE_SUCCESS='success'
+MESSAGE_FAIL='fail'
+
 @app.route('/', methods=['GET'])
 def index():
   return render_template('index.html')
@@ -27,18 +31,18 @@ def game():
     session["article"] = title
     if title == "Philosophy":
         if session["hops"] == 0:
-            flash("You have started playing starting from the target article.")
+            flash("You have started playing starting from the target article.", MESSAGE_SUCCESS)
         else:
-            flash("You have won with " + str(session["hops"]) +" hops!")
+            flash("You have won with " + str(session["hops"]) +" hops!", MESSAGE_SUCCESS)
         return redirect('/')
     if title is None:
-        flash("The requested article " + article + " doesn't exist.")
+        flash("The requested article " + article + " doesn't exist.", MESSAGE_ERROR)
         return redirect('/')
     if hrefs == []:
         if session["hops"] == 0:
-            flash("You have started from an article that doesn't have links.")
+            flash("You have started from an article that doesn't have links.", MESSAGE_ERROR)
         else:
-            flash("There are no links in the " + title + " article. You have lost.")
+            flash("There are no links in the " + title + " article. You have lost.",MESSAGE_ERROR)
         return redirect('/')
     return render_template('game.html', article=title, hrefs=hrefs, hops = session["hops"])
 
@@ -51,7 +55,7 @@ def move():
     if savedArticle != currentArticle:
         flash("Currently you are on the article "
                 + savedArticle + " (you submitted from "
-                + currentArticle + ").")
+                + currentArticle + ").", MESSAGE_FAIL)
         return redirect(url_for('game'))
 
     targetArticle = request.form["article"]
@@ -60,7 +64,7 @@ def move():
     # check for allowed move
     if targetArticle not in allowedLinks:
         flash("There are no direct links from "
-                + savedArticle + " to " + targetArticle)
+                + savedArticle + " to " + targetArticle, MESSAGE_FAIL)
         return redirect(url_for("game"))
 
 
