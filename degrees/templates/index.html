@@ -4,27 +4,149 @@
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="/static/style.css">
         <title>Six degrees to philosophy</title>
+        <style>
+            body {
+                background-color: #444444;
+                margin: 0px;
+                padding: 0px;
+            }
+            #main {
+                background-color: #555555;
+                border: 2px solid #333333;
+                max-width: 800px;
+                margin: auto;
+            }
+            #header {
+                margin-top: 0px;
+                margin-bottom: 0px;
+                text-align: center;
+                background-color: #444444;
+                color: #FFFFFF;
+            }
+
+            .header_link:link, 
+            .header_link:visited, 
+            .header_link:hover,
+            .header_link:active {
+                color: #000000;
+                text-decoration: none;
+            }
+
+            .center {
+                text-align: center;
+            }
+
+            .submission_field {
+                width: auto;
+                font-size: 50px;
+                text-align:center;
+            }
+
+            #new_article {
+                border-style: hidden;
+                background-color: gray;
+            }
+
+            #go_button {
+                background: #444444;
+                border-width: 5px;
+                border-style: groove;
+                border-color: #333333;
+            }
+
+            #answer_button {
+                background: #444444;
+                border-color: #333333;
+                border-width: 1px;
+                border-style: solid;
+                width: 100%; 
+                font-size: 120%;
+            }
+
+            .sidebar {
+                width: 30%;
+                margin: 10px;
+                padding: 10px;
+                position: relative;
+                float: right;
+            }
+
+            .center_wrapper {
+                text-align: center;
+            }
+
+            fieldset {
+                border: hidden;
+            }
+
+            /*
+             * http://viralpatel.net/blogs/css-radio-button-checkbox-background/
+             */
+            /*
+            Hide radio button (the round disc)
+            we will use just the label to create pushbutton effect
+            */
+            input[type=radio] {
+                display:none; 
+                margin:15px;
+            }
+
+            /*
+            Change the look'n'feel of labels (which are adjacent to radiobuttons).
+            Add some margin, padding to label
+            */
+            input[type=radio] + label {
+                display:inline-block;
+                padding: 4px 12px;
+                background-color: #555555;
+                border-color: #333333;
+                border: dashed 1px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            /*
+            Change background color for label next to checked radio button
+            to make it look like highlighted button
+            */
+            input[type=radio]:checked + label { 
+                background-image: none;
+                background-color:#444444;
+            }
+
+            input[type=radio] + label:hover { 
+                background-image: none;
+                background-color:#444444;
+            }
+
+
+        </style>
     </head>
     <body>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul class=flashes>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-        {% block body %}
+        <div id="main">
+            <h1 id="header"><a href="/" class="header_link">Six degrees of philosophy</a></h1>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul class=flashes>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+            {% block body %}
 
-        {# This is the block named "body" whose contents you should modify #}
+            {# This is the block named "body" whose contents you should modify #}
 
-        <form action="new-game" method="POST">
-            <label for="">Page title: </label> <input type="text" name="article">
-            <input type="submit" value="Start game">
-        </form>
+            <div class="center">
+                <form action="new-game" method="POST">
+                    <input type="text" name="article" placeholder="Article to start from?" class="submission_field" id="new_article">
+                    <input type="submit" value="Go!" class="submission_field" id="go_button">
+                </form>
+            </div>
 
-        {# This is the end of the "body" block #}
-        {% endblock %}
+            {# This is the end of the "body" block #}
+            {% endblock %}
+            <h1 id="header"><a href="/" class="header_link">Six degrees of philosophy</a></h1>
+        </div>
     </body>
 </html>
