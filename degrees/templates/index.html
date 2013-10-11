@@ -6,12 +6,13 @@
         <title>Six degrees to philosophy</title>
         <style>
             body {
-                background-color: #444444;
+                background-color: #888888;
                 margin: 0px;
                 padding: 0px;
+                font-size: 150%;
             }
             #main {
-                background-color: #555555;
+                background-color: #AAAAAA;
                 border: 2px solid #333333;
                 max-width: 800px;
                 margin: auto;
@@ -20,7 +21,7 @@
                 margin-top: 0px;
                 margin-bottom: 0px;
                 text-align: center;
-                background-color: #444444;
+                background-color: #888888;
                 color: #FFFFFF;
             }
 
@@ -48,19 +49,19 @@
             }
 
             #go_button {
-                background: #444444;
+                background: #888888;
                 border-width: 5px;
                 border-style: groove;
                 border-color: #333333;
             }
 
             #answer_button {
-                background: #444444;
+                background: #888888;
                 border-color: #333333;
                 border-width: 1px;
                 border-style: solid;
                 width: 100%; 
-                font-size: 120%;
+                font-size: 150%;
             }
 
             .sidebar {
@@ -98,7 +99,7 @@
             input[type=radio] + label {
                 display:inline-block;
                 padding: 4px 12px;
-                background-color: #555555;
+                background-color: #AAAAAA;
                 border-color: #333333;
                 border: dashed 1px;
                 width: 100%;
@@ -111,20 +112,18 @@
             */
             input[type=radio]:checked + label { 
                 background-image: none;
-                background-color:#444444;
+                background-color:#888888;
             }
 
             input[type=radio] + label:hover { 
                 background-image: none;
-                background-color:#444444;
+                background-color:#888888;
             }
 
             ul {
                 list-style-type: none;
             }
             li {
-                font-size: 150%;
-                text-shadow: black 0.1em 0.1em 0.2em;
             }
             li.fail {
                 color: red;
@@ -134,9 +133,6 @@
                 color: green;
             }
 
-            li.warning {
-                color: yellow;
-            }
         </style>
     </head>
     <body>
@@ -144,7 +140,7 @@
             <h1 id="header"><a href="/" class="header_link">Six degrees of philosophy</a></h1>
             {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
-            <ul class=flashes>
+            <ul>
                 {% for category, message in messages %}
                 <li class="{{ category }}">{{ message }}</li>
                 {% endfor %}

@@ -9,7 +9,6 @@ app = Flask(__name__)
 
 app.secret_key = "Any secret value"
 
-MESSAGE_ERROR='error'
 MESSAGE_SUCCESS='success'
 MESSAGE_FAIL='fail'
 
@@ -36,13 +35,13 @@ def game():
             flash("You have won with " + str(session["hops"]) +" hops!", MESSAGE_SUCCESS)
         return redirect('/')
     if title is None:
-        flash("The requested article " + article + " doesn't exist.", MESSAGE_ERROR)
+        flash("The requested article " + article + " doesn't exist.", MESSAGE_FAIL)
         return redirect('/')
     if hrefs == []:
         if session["hops"] == 0:
-            flash("You have started from an article that doesn't have links.", MESSAGE_ERROR)
+            flash("You have started from an article that doesn't have links.", MESSAGE_FAIL)
         else:
-            flash("There are no links in the " + title + " article. You have lost.",MESSAGE_ERROR)
+            flash("There are no links in the " + title + " article. You have lost.",MESSAGE_FAIL)
         return redirect('/')
     return render_template('game.html', article=title, hrefs=hrefs, hops = session["hops"])
 
@@ -75,5 +74,5 @@ def move():
 # new routes should be defined here
 
 if __name__ == '__main__':
-  app.run(debug=True)
+  app.run(host='0.0.0.0')
 
