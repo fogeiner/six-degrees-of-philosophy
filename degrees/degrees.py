@@ -23,7 +23,7 @@ def newGame():
 def game():
     article = session["article"]
     title, hrefs = getPage(article)
-# needed in case API returns another name (with accents) or redirection
+# needed in case API returns another name (for example with accents) or redirection
     session["article"] = title
     if title == "Philosophy":
         if session["hops"] == 0:
@@ -32,7 +32,7 @@ def game():
             flash("You have won with " + str(session["hops"]) +" hops!")
         return redirect('/')
     if title is None:
-        flash("The requested article " + article + " doesn't exist")
+        flash("The requested article " + article + " doesn't exist.")
         return redirect('/')
     if hrefs == []:
         if session["hops"] == 0:
@@ -51,7 +51,7 @@ def move():
     if savedArticle != currentArticle:
         flash("Currently you are on the article "
                 + savedArticle + " (you submitted from "
-                + currentArticle + ")")
+                + currentArticle + ").")
         return redirect(url_for('game'))
 
     targetArticle = request.form["article"]
